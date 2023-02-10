@@ -14,7 +14,7 @@ public class Assignment {
     private int number;
     @Column(name = "github_url")
     private String githubUrl;
-
+    @Column(name = "branch")
     private String branch;
     @Column(name = "review_video_url")
     private String reviewVideoUrl;
