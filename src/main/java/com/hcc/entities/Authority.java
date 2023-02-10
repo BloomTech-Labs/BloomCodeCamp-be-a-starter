@@ -1,11 +1,12 @@
 package com.hcc.entities;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
-import javax.persistence.Id;
 
 @Entity
 @Table(name = "authorities")
-public class Authority {
+public class Authority implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -13,13 +14,11 @@ public class Authority {
     @Column(name = "authority")
     private String authority;
 
-    @Column(name = "user")
+    @ManyToOne
     private User user;
 
-    public Authority(Long id, String authority, User user) {
-        this.id = id;
+    public Authority(String authority) {
         this.authority = authority;
-        this.user = user;
     }
 
     public Authority() {

@@ -21,5 +21,4 @@ public class AuthCredentialRequest {
     public String getPassword() {
         return password;
     }
-
 }

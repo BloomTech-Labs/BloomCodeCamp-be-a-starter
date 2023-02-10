@@ -14,21 +14,23 @@ public class Assignment {
     private int number;
     @Column(name = "github_url")
     private String githubUrl;
+
+    private String branch;
     @Column(name = "review_video_url")
     private String reviewVideoUrl;
-    @Column(name = "user")
+    @ManyToOne
     private User user;
-    @Column(name = "code_reviewer")
-    private User codeReviewer;
+//    @Column(name = "code_reviewer")
+//    private User codeReviewer;
 
-    public Assignment(Long id, String status, int number, String githubUrl, String reviewVideoUrl, User user, User codeReviewer) {
-        this.id = id;
+    public Assignment(String status, int number, String githubUrl,String branch, String reviewVideoUrl, User user) { //User codeReviewer
         this.status = status;
         this.number = number; //TODO: need to make this auto increment each time a new assignment is created
         this.githubUrl = githubUrl;
+        this.branch = branch;
         this.reviewVideoUrl = reviewVideoUrl;
         this.user = user;
-        this.codeReviewer = codeReviewer;
+//        this.codeReviewer = codeReviewer;
     }
 
     public Assignment() {
@@ -50,6 +52,10 @@ public class Assignment {
         return githubUrl;
     }
 
+    public String getBranch() {
+        return branch;
+    }
+
     public String getReviewVideoUrl() {
         return reviewVideoUrl;
     }
@@ -58,12 +64,16 @@ public class Assignment {
         return user;
     }
 
-    public User getCodeReviewer() {
-        return codeReviewer;
-    }
+//    public User getCodeReviewer() {
+//        return codeReviewer;
+//    }
 
     public void setGithubUrl(String githubUrl) {
         this.githubUrl = githubUrl;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 
     public void setReviewVideoUrl(String reviewVideoUrl) {
@@ -74,9 +84,9 @@ public class Assignment {
         this.user = user;
     }
 
-    public void setCodeReviewer(User codeReviewer) {
-        this.codeReviewer = codeReviewer;
-    }
+//    public void setCodeReviewer(User codeReviewer) {
+//        this.codeReviewer = codeReviewer;
+//    }
 
     public void setStatus(String status) {
         this.status = status;
