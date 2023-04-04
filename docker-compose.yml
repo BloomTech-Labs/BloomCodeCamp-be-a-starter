@@ -5,14 +5,14 @@ services:
     image: postgres
     container_name: pg_server_api0121
     ports:
-      - '5550:5432'
+      - '9090:5432'
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=api-starter-0121
     volumes:
       - ./docker/pg/postgres.conf:/etc/postgresql/postgresql.conf
-      - ./data/pg:/var/lib/postgresql/data
+      - ./data/pg:/var/lib/postgresql/datas
     command: postgres -c config_file=/etc/postgresql/postgresql.conf
     networks:
       - postgres
