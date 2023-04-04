@@ -62,8 +62,6 @@ public class Authority {
         private String authority;
         private User user;
 
-        private Builder() {}
-
         public Builder withId(Long id) {
             this.id = id;
             return this;

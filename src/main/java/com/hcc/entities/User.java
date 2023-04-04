@@ -92,9 +92,6 @@ public class User {
         private String password;
         private List<Authority> authorities;
 
-        private Builder() {
-        }
-
         public Builder withId(Long id) {
             this.id = id;
             return this;
