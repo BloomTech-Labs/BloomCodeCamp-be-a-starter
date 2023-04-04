@@ -33,7 +33,7 @@ public class User {
         this.authorities = authorities;
     }
 
-    protected User(Builder builder) {
+    private User(Builder builder) {
         this.id = builder.id;
         this.cohortStartDate = builder.cohortStartDate;
         this.username = builder.username;
