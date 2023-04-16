@@ -18,15 +18,15 @@ import java.util.Optional;
 //public class UserDetailServiceImpl implements UserDetailsService {
 //    @Autowired
 //    CustomPasswordEncoder passwordEncoder;
-
-    //@Autowired
-    // UserRepository userRepo;
-
- //   @Override
+//
+//    @Autowired
+//     UserRepository userRepo;
+//
+//    @Override
 //    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-      //  Optional<User> userOpt = userRepo.findByUsername(username);
+//        Optional<User> userOpt = userRepo.findByUsername(username);
 //        user.setUsername(username);
 //        user.setPassword(passwordEncoder.getPasswordEncoder().encode("asdfasdf"));
-      //  return userOpt.orElseThrow(() -> new UsernameNotFoundException("Invalid Credentials"));
-    //}
+//        return userOpt.orElseThrow(() -> new UsernameNotFoundException("Invalid Credentials"));
+//    }
 //}
