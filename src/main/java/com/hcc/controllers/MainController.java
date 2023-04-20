@@ -27,7 +27,7 @@ public class MainController {
         return null;
     }
 
-    @GetMapping(value = "/api/assignments/{id}", produces = {"application.json"})
+    @GetMapping(value = "/api/assignments/{id}", produces = {"application/json"})
     ResponseEntity<?> GetAssignmentsById(@PathVariable String id) {
         return null;
     }
