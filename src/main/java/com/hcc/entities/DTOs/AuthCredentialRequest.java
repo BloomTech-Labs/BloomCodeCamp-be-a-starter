@@ -38,17 +38,17 @@ public class AuthCredentialRequest{
         private String username;
         private String password;
 
-        Builder withUsername(String username) {
+        public Builder withUsername(String username) {
             this.username = username;
             return this;
         }
 
-        Builder withPassword(String password) {
+        public Builder withPassword(String password) {
             this.password = password;
             return this;
         }
 
-        AuthCredentialRequest build() {
+        public AuthCredentialRequest build() {
             return new AuthCredentialRequest(this);
         }
     }

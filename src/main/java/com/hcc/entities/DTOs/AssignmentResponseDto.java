@@ -1,60 +1,28 @@
 package com.hcc.entities.DTOs;
 
-import java.time.LocalDateTime;
-
 public class AssignmentResponseDto {
-    private Long id;
-    private String title;
-    private String description;
-    private LocalDateTime deadline;
     private String status;
+    private Integer number;
+    private String githubUrl;
+    private String branch;
+    private String reviewVideoUrl;
 
-    public AssignmentResponseDto(Long id , String title , String description , LocalDateTime deadline , String status) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.deadline = deadline;
+    public AssignmentResponseDto(String status ,
+                                 Integer number , String githubUrl ,
+                                 String branch , String reviewVideoUrl) {
         this.status = status;
+        this.number = number;
+        this.githubUrl = githubUrl;
+        this.branch = branch;
+        this.reviewVideoUrl = reviewVideoUrl;
     }
 
-    protected AssignmentResponseDto(Builder builder) {
-        this.id = builder.id;
-        this.title = builder.title;
-        this.description = builder.description;
-        this.deadline = builder.deadline;
+    public AssignmentResponseDto(Builder builder) {
         this.status = builder.status;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public LocalDateTime getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(LocalDateTime deadline) {
-        this.deadline = deadline;
+        this.number = builder.number;
+        this.githubUrl = builder.githubUrl;
+        this.branch = builder.branch;
+        this.reviewVideoUrl = builder.reviewVideoUrl;
     }
 
     public String getStatus() {
@@ -65,43 +33,75 @@ public class AssignmentResponseDto {
         this.status = status;
     }
 
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public String getGithubUrl() {
+        return githubUrl;
+    }
+
+    public void setGithubUrl(String githubUrl) {
+        this.githubUrl = githubUrl;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    public String getReviewVideoUrl() {
+        return reviewVideoUrl;
+    }
+
+    public void setReviewVideoUrl(String reviewVideoUrl) {
+        this.reviewVideoUrl = reviewVideoUrl;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
     public static class Builder {
-        private Long id;
-        private String title;
-        private String description;
-        private LocalDateTime deadline;
         private String status;
+        private Integer number;
+        private String githubUrl;
+        private String branch;
+        private String reviewVideoUrl;
 
-        Builder withId(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        Builder withTitle(String title) {
-            this.title = title;
-            return this;
-        }
-
-        Builder withDescription(String description) {
-            this.description = description;
-            return this;
-        }
-
-        Builder withDeadline(LocalDateTime deadline) {
-            this.deadline = deadline;
-            return this;
-        }
-
-        Builder withStatus(String status) {
+        public Builder withStatus(String status) {
             this.status = status;
             return this;
         }
 
-        AssignmentResponseDto build() {
+        public Builder withNumber(Integer number) {
+            this.number = number;
+            return this;
+        }
+
+        public Builder withGithubUrl(String githubUrl) {
+            this.githubUrl = githubUrl;
+            return this;
+        }
+
+        public Builder withBranch(String branch) {
+            this.branch = branch;
+            return this;
+        }
+
+        public Builder withReviewVideoUrl(String reviewVideoUrl) {
+            this.reviewVideoUrl = reviewVideoUrl;
+            return this;
+        }
+
+        public AssignmentResponseDto build() {
             return new AssignmentResponseDto(this);
         }
     }
