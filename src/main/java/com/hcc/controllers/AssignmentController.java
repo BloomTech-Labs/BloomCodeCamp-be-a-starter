@@ -60,7 +60,7 @@ public class AssignmentController {
                 .build(), HttpStatus.OK);
     }
     @PutMapping(value = "/api/assignments/{id}", consumes = {"application/json"}, produces = {"application/json"})
-    ResponseEntity<?> PutAssignmentById(@PathVariable Long id, @RequestBody Assignment request) throws FileNotFoundException{
+    ResponseEntity<?> putAssignmentById(@PathVariable Long id, @RequestBody Assignment request) throws FileNotFoundException{
         Assignment assignment = assignmentService.loadAssignmentById(id)
                 .orElseThrow(FileNotFoundException::new);
         assignmentService.delete(assignment);
