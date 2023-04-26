@@ -12,7 +12,7 @@ services:
       - POSTGRES_DB=api-starter-0121
     volumes:
       - ./docker/pg/postgres.conf:/etc/postgresql/postgresql.conf
-      - ./data/pg:/var/lib/postgresql/datas
+      - ./data/pg:/var/lib/postgresql/data
     command: postgres -c config_file=/etc/postgresql/postgresql.conf
     networks:
       - postgres
