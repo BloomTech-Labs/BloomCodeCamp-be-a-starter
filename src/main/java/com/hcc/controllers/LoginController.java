@@ -1,31 +1,43 @@
 package com.hcc.controllers;
 
-import com.hcc.exceptions.UserNotFoundException;
-import com.hcc.services.AuthorityService;
+import com.hcc.entities.DTOs.AuthCredentialRequest;
+import com.hcc.entities.User;
+import com.hcc.services.UserDetailServiceImpl;
+import com.hcc.utils.JWtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/")
 public class LoginController {
+
     @Autowired
-    AuthorityService service;
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private JWtUtils jwtUtils;
+    @Autowired
+    private UserDetailServiceImpl service;
 
-    @GetMapping("/api/auth/login")
-    ResponseEntity<?> login(@RequestBody String username, @RequestBody String password) {
-        service.validateUser(username, password)
-                .orElseThrow(UserNotFoundException::new);
-        return new ResponseEntity<>(false, HttpStatus.OK);
+    @PostMapping(value = "/api/auth/login", consumes = {"application/json"}, produces = {"application/json"})
+    public ResponseEntity<?> login(@RequestBody AuthCredentialRequest authCredentialRequestDto) {
+
+        try{
+            Authentication authentication = authenticationManager.authenticate
+                    (new UsernamePasswordAuthenticationToken(authCredentialRequestDto.getUsername(),
+                            authCredentialRequestDto.getPassword()));
+            User user = (User) authentication.getPrincipal();
+            user.setPassword(null);
+            return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, jwtUtils.generateToken(user)).body("Login SUCCESS");
+        } catch (BadCredentialsException exception){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
-
-//    @GetMapping("/api/auth/validate")
-//    ResponseEntity<?> ValidateToken(@RequestBody String username, @RequestBody String password) {
-//        AuthCredentialRequest.builder().withUsername(username).withPassword(password).build();
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
 }
