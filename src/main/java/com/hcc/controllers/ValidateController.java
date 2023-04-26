@@ -20,7 +20,7 @@ public class ValidateController {
 
     @GetMapping(value = "/api/aut/validate", consumes = {"application/json"}, produces = {"application/json"})
     ResponseEntity<?> validateToken(@RequestParam String token, @AuthenticationPrincipal User user) {
-        boolean valid = utils.validateToken(token, (UserDetails) user);
+        boolean valid = utils.validateToken(token, user);
         return new ResponseEntity<>(valid, HttpStatus.OK);
     }
 }
