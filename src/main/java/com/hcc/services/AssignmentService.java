@@ -24,14 +24,11 @@ public class AssignmentService {
         return repository.findById(id);
     }
 
-    public void addNewAssignmentById(Long id) {
-        Assignment assignment = Assignment.builder()
-                .withId(id)
-                .build();
+    public void save(Assignment assignment) {
         repository.save(assignment);
     }
 
-    public void updateAssignment(Assignment assignment) {
-        repository.save(assignment);
+    public void delete(Assignment assignment) {
+        repository.delete(assignment);
     }
 }
