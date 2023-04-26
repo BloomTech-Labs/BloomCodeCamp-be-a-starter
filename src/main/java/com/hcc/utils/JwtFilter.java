@@ -1,6 +1,6 @@
 package com.hcc.utils;
 
-import com.hcc.repositories.UserRepository;:
+import com.hcc.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
