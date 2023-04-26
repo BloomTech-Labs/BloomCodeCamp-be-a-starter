@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum AuthorityEnum {
-    REVIEWER("REVIEWER"),
-    LEARNER("LEARNER");
+    LEARNER_ROLE("LEARNER_ROLE"),
+    CODEREVIEWER_ROLE("CODEREVIEWER_ROLE");
 
     private String authority;
 
