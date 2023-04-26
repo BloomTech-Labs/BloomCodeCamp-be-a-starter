@@ -22,10 +22,10 @@ public class AssignmentController {
     @Autowired
     AssignmentService assignmentService;
 
-    @GetMapping(value = "/api/assignments", produces = {"application/json"})
+    @GetMapping(value = "/api/assignments",consumes = {"application/json"}, produces = {"application/json"})
     ResponseEntity<?> getAssignmentsByUser(@AuthenticationPrincipal User user) throws Exception {
 
-            if (user.getAuthorities().contains(AuthorityEnum.LEARNER.name())) {
+            if (user.getAuthorities().contains(AuthorityEnum.LEARNER_ROLE.name())) {
                 throw new Exception("You do not have the authority for this action.");
             }
 
@@ -47,8 +47,8 @@ public class AssignmentController {
     }
 
     @GetMapping(value = "/api/assignments/{id}", produces = {"application/json"})
-    ResponseEntity<?> GetAssignmentById(@PathVariable String id) throws FileNotFoundException {
-        Assignment assignment = assignmentService.loadAssignmentById(Long.valueOf(id))
+    ResponseEntity<?> GetAssignmentById(@PathVariable Long id) throws FileNotFoundException {
+        Assignment assignment = assignmentService.loadAssignmentById(id)
                 .orElseThrow(FileNotFoundException::new);
 
         return new ResponseEntity<>(new AssignmentResponseDto.Builder()
@@ -59,16 +59,26 @@ public class AssignmentController {
                 .withReviewVideoUrl(assignment.getReviewVideoUrl())
                 .build(), HttpStatus.OK);
     }
+    @PutMapping(value = "/api/assignments/{id}", consumes = {"application/json"}, produces = {"application/json"})
+    ResponseEntity<?> PutAssignmentById(@PathVariable Long id, @RequestBody Assignment request) throws FileNotFoundException{
+        Assignment assignment = assignmentService.loadAssignmentById(id)
+                .orElseThrow(FileNotFoundException::new);
+        assignmentService.delete(assignment);
 
-    @PutMapping(value = "/api/assignments/{id}", produces = {"application/json"})
-    ResponseEntity<?> PutAssignmentById(@PathVariable String id) {
-        assignmentService.addNewAssignmentById(Long.valueOf(id));
-        return new ResponseEntity<>(AssignmentResponseDto.builder().build(), HttpStatus.OK);
+        request.setId(id);
+        assignmentService.save(request);
+
+        return new ResponseEntity<>(new AssignmentResponseDto.Builder()
+                .withStatus(request.getStatus())
+                .withNumber(request.getNumber())
+                .withGithubUrl(request.getGithubUrl())
+                .withBranch(request.getBranch())
+                .withReviewVideoUrl(request.getReviewVideoUrl())
+                .build(), HttpStatus.OK);
     }
-
-    @PostMapping(value = "/api/assignments", produces = {"application/json"})
+    @PostMapping(value = "/api/assignments", consumes = {"application/json"}, produces = {"application/json"})
     ResponseEntity<?> postAssignment(@Validated @RequestBody Assignment request) {
-        assignmentService.updateAssignment(request);
+        assignmentService.save(request);
 
         return new ResponseEntity<>(new AssignmentResponseDto.Builder()
                 .withStatus(request.getStatus())
