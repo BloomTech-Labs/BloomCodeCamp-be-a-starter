@@ -1,19 +1,22 @@
 package com.hcc.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "date")
-    private Date cohortStartDate;
+    private LocalDate cohortStartDate;
 
     @Column(name = "username")
     private String username;
@@ -21,13 +24,11 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "user_authorities", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "authorities")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonIgnore
     private List<Authority> authorities;
 
-    protected User(Long id , Date cohortStartDate , String username,
+    protected User(Long id , LocalDate cohortStartDate , String username,
                 String password , List<Authority> authorities) {
         this.id = id;
         this.cohortStartDate = cohortStartDate;
@@ -52,16 +53,36 @@ public class User {
         this.id = id;
     }
 
-    public Date getCohortStartDate() {
+    public LocalDate getCohortStartDate() {
         return cohortStartDate;
     }
 
-    public void setCohortStartDate(Date cohortStartDate) {
+    public void setCohortStartDate(LocalDate cohortStartDate) {
         this.cohortStartDate = cohortStartDate;
     }
 
     public String getUsername() {
         return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setUsername(String username) {
@@ -90,7 +111,7 @@ public class User {
 
     public static class Builder {
         private Long id;
-        private Date cohortStartDate;
+        private LocalDate cohortStartDate;
         private String username;
         private String password;
         private List<Authority> authorities;
@@ -100,7 +121,7 @@ public class User {
             return this;
         }
 
-        public Builder withCohortStartDate(Date cohortStartDate) {
+        public Builder withCohortStartDate(LocalDate cohortStartDate) {
             this.cohortStartDate = cohortStartDate;
             return this;
         }
