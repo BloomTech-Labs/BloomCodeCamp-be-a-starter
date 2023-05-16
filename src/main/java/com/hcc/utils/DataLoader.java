@@ -1,6 +1,10 @@
 package com.hcc.utils;
 
+import com.hcc.entities.Assignment;
+import com.hcc.entities.Authority;
 import com.hcc.entities.User;
+import com.hcc.enums.AuthorityEnum;
+import com.hcc.repositories.AssignmentRepository;
 import com.hcc.repositories.AuthorityRepository;
 import com.hcc.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +21,6 @@ public class DataLoader implements CommandLineRunner {
     UserRepository userRepository;
     @Autowired
     AuthorityRepository authorityRepository;
-
     @Override
     public void run(String... args) throws Exception {
         loadUserData();
@@ -28,7 +31,7 @@ public class DataLoader implements CommandLineRunner {
             PasswordEncoder encoder = new BCryptPasswordEncoder();
             String password = encoder.encode("password");
             User user = new User.Builder().withCohortStartDate(LocalDate.now())
-                    .withUsername("joe")
+                    .withUsername("jhon")
                     .withPassword(password)
                     .build();
             userRepository.save(user);
