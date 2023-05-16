@@ -22,6 +22,13 @@ public class AssignmentController {
     @Autowired
     AssignmentService assignmentService;
 
+    /**
+     * Receives a GET request from the frontend, using the request to get a list of
+     * assignments from the DB
+     * @param user A USER object
+     * @return A new ResponseEntity object containing a list of assignments and status
+     * @throws Exception will throw an exception if the authority of the user is not a learner.
+     */
     @GetMapping(value = "/api/assignments",consumes = {"application/json"}, produces = {"application/json"})
     ResponseEntity<?> getAssignmentsByUser(@AuthenticationPrincipal User user) throws Exception {
 
@@ -46,6 +53,12 @@ public class AssignmentController {
             return new ResponseEntity<>(assignments, HttpStatus.OK);
     }
 
+    /**
+     *  Gets an assignment object using a given ID
+     * @param id the assignments' id to search for
+     * @return A new ResponseEntity containing ARD and status
+     * @throws FileNotFoundException if the assignment is not found
+     */
     @GetMapping(value = "/api/assignments/{id}", produces = {"application/json"})
     ResponseEntity<?> GetAssignmentById(@PathVariable Long id) throws FileNotFoundException {
         Assignment assignment = assignmentService.loadAssignmentById(id)
@@ -59,6 +72,15 @@ public class AssignmentController {
                 .withReviewVideoUrl(assignment.getReviewVideoUrl())
                 .build(), HttpStatus.OK);
     }
+
+    /**
+     *  Puts an updated Assignment in the DB using the modified assignment and the
+     *  originals ID.
+     * @param id the unique identifier for the original assignment to be replaced.
+     * @param request the updated assignment to replace the original.
+     * @return the updated assignment in an ARD and a status.
+     * @throws FileNotFoundException
+     */
     @PutMapping(value = "/api/assignments/{id}", consumes = {"application/json"}, produces = {"application/json"})
     ResponseEntity<?> putAssignmentById(@PathVariable Long id, @RequestBody Assignment request) throws FileNotFoundException{
         Assignment assignment = assignmentService.loadAssignmentById(id)
@@ -76,6 +98,12 @@ public class AssignmentController {
                 .withReviewVideoUrl(request.getReviewVideoUrl())
                 .build(), HttpStatus.OK);
     }
+
+    /**
+     * Puts a brand-new assignment in the DB
+     * @param request The new Assignment to put inside the DB
+     * @return an ARD of the new assignment and a status in a new responseEntity.
+     */
     @PostMapping(value = "/api/assignments", consumes = {"application/json"}, produces = {"application/json"})
     ResponseEntity<?> postAssignment(@Validated @RequestBody Assignment request) {
         assignmentService.save(request);
