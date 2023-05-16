@@ -32,8 +32,11 @@ public class Assignment {
     @JoinColumn(name = "code_reviewer")
     private User codeReviewer;
 
+    public Assignment() {
+    }
+
     protected Assignment(long id , String status , Integer number , String githubUrl,
-                      String branch , String reviewVideoUrl , User user , User codeReviewer) {
+                         String branch , String reviewVideoUrl , User user , User codeReviewer) {
         this.id = id;
         this.status = status;
         this.number = number;
