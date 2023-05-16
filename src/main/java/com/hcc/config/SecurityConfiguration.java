@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import javax.servlet.http.HttpServletResponse;
 
 @EnableWebSecurity
-public class SecurityConfig  extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserDetailServiceImpl userDetailServiceImpl;
@@ -50,10 +50,6 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api-docs/**").permitAll()
-                .antMatchers("/v3/api-docs/**").permitAll()
-                .antMatchers("/swagger-ui.html").permitAll()
-                .antMatchers("/swagger-ui/**").permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(jwtFilt, UsernamePasswordAuthenticationFilter.class);
     }
