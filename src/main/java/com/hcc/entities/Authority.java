@@ -7,28 +7,30 @@ import javax.persistence.*;
 @Entity
 @Table(name = "authorities")
 public class Authority implements GrantedAuthority {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "authority")
     private String authority;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(optional=false)
     private User user;
 
-    protected Authority(Long id , String authority , User user) {
-        this.id = id;
+
+    public Authority() { }
+
+    public Authority(String authority, User user) {
         this.authority = authority;
         this.user = user;
     }
 
     private Authority(Builder builder) {
-        id = builder.id;
-        authority = builder.authority;
-        user = builder.user;
+        this.authority = builder.authority;
+        this.user = builder.user;
+    }
+
+    public Authority(String authority) {
+        this.authority = authority;
     }
 
     public Long getId() {
@@ -39,6 +41,7 @@ public class Authority implements GrantedAuthority {
         this.id = id;
     }
 
+    @Override
     public String getAuthority() {
         return authority;
     }
@@ -60,14 +63,8 @@ public class Authority implements GrantedAuthority {
     }
 
     public static class Builder {
-        private Long id;
         private String authority;
         private User user;
-
-        public Builder withId(Long id) {
-            this.id = id;
-            return this;
-        }
 
         public Builder withAuthority(String authority) {
             this.authority = authority;
