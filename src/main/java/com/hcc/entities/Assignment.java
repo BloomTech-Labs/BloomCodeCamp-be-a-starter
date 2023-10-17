@@ -7,14 +7,16 @@ import javax.persistence.*;
 public class Assignment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long assignmentId;
     @Column(name = "status")
     private String status;
     private int number;
     private String githubUrl;
     private String branch;
     private String reviewVideoUrl;
+    @ManyToOne
     private User user;
+    @ManyToOne
     private User codeReviewer;
 
     public Assignment() {
@@ -30,12 +32,12 @@ public class Assignment {
         this.codeReviewer = codeReviewer;
     }
 
-    public Long getId() {
-        return id;
+    public Long getAssignmentId() {
+        return assignmentId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.assignmentId = id;
     }
 
     public String getStatus() {

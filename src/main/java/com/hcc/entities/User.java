@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User  implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +22,7 @@ public class User  implements UserDetails {
     private String username;
     @Column(name = "password")
     private String password;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Authority> authorities;
 
     public User() {}

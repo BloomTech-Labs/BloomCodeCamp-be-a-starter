@@ -1,0 +1,354 @@
+
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Learner Dashboard - OpenAPI 3.0",
+    "version": "1.0.11"
+  },
+  "paths": {
+    "/api/assignments/{id}": {
+      "put": {
+        "description": "update an assignment by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Assignment"
+                  },
+                  "example": {
+                    "id": 2710,
+                    "status": "assigned",
+                    "number": 234,
+                    "githubUrl": "github.com/teddy",
+                    "branch": "main",
+                    "reviewVideoUrl": "video.review",
+                    "user": "me",
+                    "codeReviewer": "admin"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 400,
+                    "message": "One of the inputs was invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 500,
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "get assignments by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Assignment"
+                  },
+                  "example": {
+                    "id": 2710,
+                    "status": "assigned",
+                    "number": 234,
+                    "githubUrl": "github.com/teddy",
+                    "branch": "main",
+                    "reviewVideoUrl": "video.review",
+                    "user": "me",
+                    "codeReviewer": "admin"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 400,
+                    "message": "One of the inputs was invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 500,
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/assignments": {
+      "get": {
+        "description": "get assignments by user",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Assignment"
+                  },
+                  "example": {
+                    "id": 2711,
+                    "status": "reviewed",
+                    "number": 236,
+                    "githubUrl": "github.com/teddy",
+                    "branch": "main",
+                    "reviewVideoUrl": "video.review",
+                    "user": "me",
+                    "codeReviewer": "admin"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalide input error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 400,
+                    "message": "One of the inputs was invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 500,
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "create a new assignment",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Assignment"
+                  },
+                  "example": {
+                    "id": 2711,
+                    "status": "submitted",
+                    "number": 384,
+                    "githubUrl": "github.com/teddy",
+                    "branch": "main",
+                    "reviewVideoUrl": "video.review",
+                    "user": "me",
+                    "codeReviewer": "admin"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 400,
+                    "message": "One of the inputs was invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 500,
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Assignment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "githubUrl": {
+            "type": "string"
+          },
+          "branch": {
+            "type": "string"
+          },
+          "reviewVideoUrl": {
+            "type": "string"
+          },
+          "user": {
+            "type": "object"
+          },
+          "codeReviewer": {
+            "type": "object"
+          }
+        }
+      },
+      "User": {
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "authority": {
+            "type": "object"
+          }
+        }
+      },
+      "Authority": {
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "authority": {
+            "type": "string"
+          },
+          "user": {
+            "type": "object"
+          }
+        }
+      },
+      "Error": {
+        "properties": {
+          "code": {
+            "type": "number"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

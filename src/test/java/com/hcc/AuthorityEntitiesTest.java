@@ -19,8 +19,8 @@ public class AuthorityEntitiesTest {
 
     @BeforeEach
     public void setUp() {
-        id = 12345678L;
-        authority = new Authority(id, "12345", user);
+
+        authority = new Authority("12345", user);
         user = new User();
 
     }

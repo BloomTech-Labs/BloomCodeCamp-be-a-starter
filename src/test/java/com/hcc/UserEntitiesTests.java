@@ -26,7 +26,7 @@ public class UserEntitiesTests {
     public void setUp() {
         date = new Date(12-24-2012);
         list = new ArrayList<>();
-        authority = new Authority(1234L, "13579", user);
+        authority = new Authority("13579", user);
         list.add(authority);
         user = new User(date,"tom", "12343", list);
     }
@@ -48,7 +48,7 @@ public class UserEntitiesTests {
     @Test
     void checkauthorities_getAuthorities_returnsAuthority() {
         User user2 = new User();
-        Authority authority1 = new Authority(1234L, "13579", list.get(0).getUser());
+        Authority authority1 = new Authority("13579", list.get(0).getUser());
         User user1 = list.get(0).getUser();
 
         assertNotNull(user.getAuthorities());

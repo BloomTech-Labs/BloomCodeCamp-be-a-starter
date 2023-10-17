@@ -1,4 +1,4 @@
-package com.hcc.enums;
-
-public enum AuthorityEnum {
-}
+//package com.hcc.enums;
+//
+//public enum AuthorityEnum {
+//}

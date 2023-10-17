@@ -15,15 +15,13 @@ public class Authority implements GrantedAuthority {
     @ManyToOne
     private User user;
 
-    public Authority(Long id, String authority, User user) {
-        this.id = id;
+    public Authority(String authority, User user) {
         this.authority = authority;
         this.user = user;
     }
     public Authority(String authority) {
         this.authority = authority;
     }
-    public Authority() {}
 
     public Long getId() {
         return id;
