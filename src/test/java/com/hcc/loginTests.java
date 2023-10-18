@@ -48,7 +48,7 @@ public class loginTests {
     }
 
     @Test
-    public void givenInvalidUsername_thenLogin() {
+    public void givenInvalidUsername_thenDontLogin() {
         AuthCredentialRequest request = new AuthCredentialRequest();
         request.setUsername("steve");
         request.setPassword(user.getPassword());
