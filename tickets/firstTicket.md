@@ -69,7 +69,7 @@ Your job is to begin work on the LMS by setting up the domain objects shown abov
 
 #### Uncomment the spring security dependencies inside the build.gradle file
 
-#### Uncomment the Jwt Utils, CustomPasswordEncoder and the UserDetailsServiceImpl
+#### Uncomment the CustomPasswordEncoder and the UserDetailsServiceImpl
 
 - UserDetaiServiceImpl phase 1
 ```Java
@@ -181,6 +181,93 @@ Overrides
     public String getPassword() {
             return password;
             }
+```
+
+#### Create the Enums
+
+
+##### Example AssignmentEnum.java
+```Java
+package com.hcc.enums;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+public enum AssignmentEnum {
+    ASSIGNMENT_1(1, "Spring Boot Service"),
+    ASSIGNMENT_2(2, "Spring Boot Data JPA"),
+    ASSIGNMENT_3(3, "Spring Boot Postgresql"),
+    ASSIGNMENT_4(4, "Docker Compose Setup"),
+    ASSIGNMENT_5(5, "React Frontend Hooks"),
+    ASSIGNMENT_6(6, "Python Problems"),
+    ASSIGNMENT_7(7, "Assembly Boot Sector Hello World"),
+    ASSIGNMENT_8(8, "CTF Buffer Overflow"),
+    ASSIGNMENT_9(9, "Docker Build"),
+    ASSIGNMENT_10(10, "aws buckets"),
+    ASSIGNMENT_11(11, "hashmaps and sets"),
+    ASSIGNMENT_12(12, "computational counting"),
+    ASSIGNMENT_13(13, "data driven websites"),
+    ASSIGNMENT_14(14, "SQL Reporting");
+
+    private int assignmentNumber;
+    private String assignmentName;
+
+    AssignmentEnum (int assignmentNumber, String assignmentName) {
+        this.assignmentNumber = assignmentNumber;
+        this.assignmentName = assignmentName;
+    }
+
+    public String getAssignmentName() {
+        return assignmentName;
+    }
+
+    public int getAssignmentNumber() {
+        return assignmentNumber;
+    }
+}
+```
+
+##### Example AssignmentStatusEnum.java
+```Java
+package com.hcc.enums;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+public enum AssignmentStatusEnum {
+    PENDING_SUBMISSION("Pending Submission", 1),
+    SUBMITTED("Submitted", 2),
+    IN_REVIEW("In Review", 3),
+    NEEDS_UPDATE("Needs Update", 4),
+    COMPLETED("Completed", 5),
+    RESUBMITTED("Resubmitted", 6);
+
+    private String status;
+    private Integer step;
+    AssignmentStatusEnum(String status, Integer step) {
+        this.status = status;
+        this.step = step;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public Integer getStep() {
+        return step;
+    }
+}
+```
+
+##### Example AuthorityEnum.java
+```Java
+package com.hcc.enums;
+
+public enum AuthorityEnum {
+    ROLE_LEARNER,
+    ROLE_REVIEWER,
+    ROLE_ADMIN;
+}
 ```
 
 
