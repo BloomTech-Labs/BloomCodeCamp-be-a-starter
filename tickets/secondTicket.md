@@ -24,7 +24,7 @@ Build the following endpoints:
 ### Add JWT dependency in to the build.gradle file and add JWTUtil.java
 - Add JWT Dependency in to the build.gradle file
 ```gradle
-implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+implementation 'io.jsonwebtoken:jjwt:0.9.1'
 ```
 
 - Add JWTUtil.java in the utils package
