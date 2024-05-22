@@ -1,8 +1,8 @@
-version: '3'
+# version: '3'
 
 services:
   pgdb:
-    image: postgres
+    image: postgres:latest
     container_name: pg_server_api0121
     ports:
       - '5550:5432'
